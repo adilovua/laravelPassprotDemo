@@ -7,13 +7,53 @@ use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use OpenApi\Annotations as OA;
 
 class RegisterController extends BaseController
 {
     /**
-     * Register api
-     *
-     * @return \Illuminate\Http\Response
+     * @OA\Info(title="My First API", version="0.1"),
+     * @OA\Post(
+     *     path="/api/register",
+     *     tags={"users"},
+     *     summary="Create new user",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                  @OA\Property(
+     *                      property="name",
+     *                      type="string",
+     *                  ),
+     *                  @OA\Property(
+     *                      property="email",
+     *                      type="string",
+     *                  ),
+     *                  @OA\Property(
+     *                      property="password",
+     *                      type="string",
+     *                  ),
+     *                  @OA\Property(
+     *                      property="c_password",
+     *                      type="string",
+     *                  ),
+     *              )
+     *          )
+     *     ),
+     *     @OA\Response(
+     *          response=200,
+     *          description="Successfull operation",
+     *     ),
+     *     @OA\Response(
+     *          response=400,
+     *          description="Failed",
+     *     ),
+     *     @OA\Response(
+     *          response=403,
+     *          description="Forbidden",
+     *     ),
+     * )
      */
     public function register(Request $request)
     {
